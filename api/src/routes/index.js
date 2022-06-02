@@ -4,33 +4,33 @@ const axios = require('axios')
 const router = Router();
 
 //-------------------------------------
-const uploadTypes = async () => {
-  let types = await axios.get('https://pokeapi.co/api/v2/type')
-    .then(val => {
-      let res = val.data.results.map(async el => {
-
-        let mod = await axios.get(el.url)
-        let data = mod.data
-        return {ID: data.id, name: data.name}
-
+try{
+  const uploadTypes = async () => {
+    let types = await axios.get('https://pokeapi.co/api/v2/type')
+      .then(val => {
+        let res = val.data.results.map(async el => {
+  
+          let mod = await axios.get(el.url)
+          let data = mod.data
+          return {ID: data.id, name: data.name}
+  
+        })
+        return res
       })
-      return res
-    })
-    Promise.all(await types)
-    .then(val => {
-      let list = []
-      let res = val.map(async el => {
-        list.push(el)
-        let newType = await Type.create(el)
-        newType.save()          
+      Promise.all(await types)
+      .then(val => {
+        val.map(async el => {
+          Type.create(el)
+        })
       })
-      return(list)
-    })
-    console.log('Types Loaded')
+      console.log('Types Loaded')
+  }
+  setTimeout(() => {
+    uploadTypes()
+  }, 5000);
+} catch (err) {
+  console.log(err)
 }
-setTimeout(() => {
-  uploadTypes()
-}, 5000);
 
 const getSinglePokemon = async (args) => {
   const objConst = (json) => {
@@ -138,9 +138,6 @@ const getPokemons = async (args) => {
   return res
 }
 
-
-
-
 const getPokemonTypes = async () => {
   let res = await Type.findAll()
   let final = res.map(el => {
@@ -165,7 +162,7 @@ router.get('/pokemons', async (req, res) => {
     } else if (name) {
       const pokemon = await getPokemons(name)
       res.send(pokemon)
-    }
+    } 
 
     //-----------------------
   } catch (error) {

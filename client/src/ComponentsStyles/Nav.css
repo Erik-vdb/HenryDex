@@ -1,5 +1,29 @@
+.NavBar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  height: 10vw;
+}
+
+.navContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  padding: 0px 30px;
+  background: rgb(255,255,255); 
+  background: linear-gradient(90deg, rgba(255,255,255,0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.7 );
+
+  border-radius: 2vw;
+  
+  width: 100%;
+}
+
 
 .RootLink-Pokeball{
-  width: 10vw;
-  height: 10vw;
+  width: 8vw;
+  
 }
