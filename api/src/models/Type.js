@@ -12,6 +12,9 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       unique: true,
+    },
+    pokemon: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
   }, {timestamps: false}
   )

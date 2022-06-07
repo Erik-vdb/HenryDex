@@ -1,38 +1,12 @@
 const { Pokemon, Type } = require('../db')
 const { Router } = require('express')
-const axios = require('axios')
+const axios = require('axios');
 const router = Router();
 
 //-------------------------------------
-try{
-  const uploadTypes = async () => {
-    let types = await axios.get('https://pokeapi.co/api/v2/type')
-      .then(val => {
-        let res = val.data.results.map(async el => {
-  
-          let mod = await axios.get(el.url)
-          let data = mod.data
-          return {ID: data.id, name: data.name}
-  
-        })
-        return res
-      })
-      Promise.all(await types)
-      .then(val => {
-        val.map(async el => {
-          Type.create(el)
-        })
-      })
-      console.log('Types Loaded')
-  }
-  setTimeout(() => {
-    uploadTypes()
-  }, 5000);
-} catch (err) {
-  console.log(err)
-}
 
 const getSinglePokemon = async (args) => {
+  
   const objConst = (json) => {
     const data = json.data
     const newObj = {
@@ -47,15 +21,16 @@ const getSinglePokemon = async (args) => {
       fuerza: data.stats[1].base_stat,
       defensa: data.stats[2].base_stat,
       velocidad: data.stats[5].base_stat,
+      createdInDB: false,
       tipos: data.types.map(el => {
         return el.type.name
       })
     }
     return newObj
   }
-
-  let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${args}`)
-  return objConst(res)
+  
+    let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${args}`)
+    return objConst(res)
 }
 
 const getAllPokemons = async (page) => {
@@ -63,10 +38,9 @@ const getAllPokemons = async (page) => {
   const getApiInfo = async () => {
     let list = [] //array store init
 
-    let api_page = page // 
-    let count = (api_page - 1) * 12 // 
+    let count = (page - 1) * 12 // 
 
-    while (count < api_page * 12) {
+    while (count < page * 12 && count < 898) {
       count++
       list.push(count)
     }
@@ -81,53 +55,19 @@ const getAllPokemons = async (page) => {
         return val
       })
 
-    return final
-
-    //------------------------------
-    // let list = await fetchUrl()
-
-    // let requests = await list.map(async (el) =>{
-    //   return axios.get(el.url)
-    // })
-
-    // return await Promise.all(requests)
-    // .then( val => val.map(el => {
-    //   const { data } = el
-    //   const newObj = {
-    //     //Pokemon info
-    //     ID: data.id,
-    //     nombre: data.name,
-    //     altura: data.height,
-    //     peso: data.weight,
-    //     img: data.sprites.other['official-artwork'].front_default,
-
-    //     // StatPage
-    //     vida: data.stats[0].base_stat,
-    //     fuerza: data.stats[1].base_stat,
-    //     defensa: data.stats[2].base_stat,
-    //     velocidad: data.stats[5].base_stat
-    //   }
-    //   return newObj
-    // })
-    // )
-    // .catch(err => console.log(err))
+    return final    
   }
 
   const getDBInfo = async () => {
-    return await Pokemon.findAll({
-      include: {
-        model: Type,
-        attributes: ['name'],
-        through: { attributes: [] }
-      }
-    })
+    const poke = await Pokemon.findAll()
+    console.log(poke)
+    return poke
   }
 
   const joinInfo = async () => {
     const Api = await getApiInfo()
     const DB = await getDBInfo()
-    let joint = Api.concat(DB)
-    return joint
+    return DB.concat(Api)
   }
 
   return joinInfo()
@@ -138,16 +78,11 @@ const getPokemons = async (args) => {
   return res
 }
 
-const getPokemonTypes = async () => {
-  let res = await Type.findAll()
-  let final = res.map(el => {
-    return el.dataValues
-  })
-  console.log(final)
-  return final
-}
+
 
 //-------------------------------------
+
+
 router.get('/pokemons', async (req, res) => {
   let { name, page } = req.query
   try {
@@ -179,7 +114,45 @@ router.get('/pokemons/:id', async (req, res) => {
 })
 
 router.get('/types', async (req, res) => {
-  const types = await getPokemonTypes()
+  try {
+  await axios.get('https://pokeapi.co/api/v2/type')
+  .then(v => v.data.results)
+  .then(el => el.map(e => axios.get(e.url)))
+  .then(e => Promise.all(e)
+  .then(res => res.map(el => {
+    const {id, name, pokemon} = el.data
+    const pokemonArr = pokemon.map(el => {
+      return el.pokemon.url
+    })
+    return {
+      id,
+      name,
+      pokemonArr
+    }
+  }))
+  .then(res => res.map(el => Type.findOrCreate({where: {ID: el.id, name: el.name, pokemon: el.pokemonArr}})))
+  )
+
+  const types = await Type.findAll()
   res.send(types)
+  
+} catch (error) {
+  res.send(error)
+}
+
+  // const types = await getPokemonTypes()
+  // res.send(types)
+})
+
+router.post('/pokemons', async (req, res) => {
+  const {name, vida, fuerza, defensa, velocidad, altura, peso, tipos, img} = req.body
+  
+  try {
+    await Pokemon.create({name, vida, fuerza, defensa, velocidad, altura, peso, tipos, img})
+    const confirm = await Pokemon.findOne({where: {name: name}})
+    res.status(200).send(confirm)
+  } catch (err){
+    res.status(400).send(err)
+  }
 })
 module.exports = router;

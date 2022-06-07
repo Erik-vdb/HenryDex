@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import '../ComponentsStyles/Nav.css'
-import { findPokemonByName } from "../redux/pokemons";
 
 export default function Navbar() {
-  const dispatch = useDispatch()
 
   let [name, setName] = useState('')
 
@@ -21,6 +18,8 @@ export default function Navbar() {
       setName('')
     }
   }
+
+
   return (
     <div className="NavBar">
       <div className="navContainer">
@@ -36,7 +35,7 @@ export default function Navbar() {
 
       <div className="searchBar">
         <label htmlFor="Search">
-        <input type="search" placeholder="Buscar..." id="Search" value={name} onSubmit={e => handleSubmit(e)} onChange={(e) => handleChange(e)}/>
+        <input type="search" placeholder="Buscar..." id="Search" name="pokeQ" value={name} onChange={(e) => handleChange(e)}/>
         </label>
         <input type="submit" className="Submit" onClick={e => handleSubmit(e)}/>
       </div>

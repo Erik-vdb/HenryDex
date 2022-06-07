@@ -1,0 +1,21 @@
+.root{
+  display: flex;
+}
+
+.Creation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: auto;
+  width: 50%;
+
+  background-color: #ffffff80;
+  border: 1px solid #ffffff70;
+  border-radius: 1vw;
+
+}
+
+li {
+  list-style-type: none;
+}

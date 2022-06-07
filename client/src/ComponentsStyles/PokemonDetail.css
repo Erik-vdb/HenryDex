@@ -1,3 +1,37 @@
+.PokemonDetail{
+  display: flex;
+  flex-direction: column;
+  height: 100vw;
+
+  align-items: center;
+}
+
+.PokeInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #ffffff60;
+
+  border-radius: 10vw;
+  border: 1px solid #ffffff80;
+
+
+}
+.StatSheet{
+  margin: 10px;
+  padding: 5px 10vw;
+
+  text-align: center;
+  background-color: #ffffff60;
+  
+  border-radius: 10vw;
+  border: 1px solid #ffffff80;
+}
 .PokeImg{
-  width: 15%;
+  width: 30%;
+}
+
+.loading{
+  width: 50vw;
 }

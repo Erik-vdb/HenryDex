@@ -1,6 +1,6 @@
 .startPage{
   display: flex;
-  
+  justify-content: center;
   width: 100%;
 }
 
@@ -9,6 +9,13 @@
   justify-content: center;
   width: 100%;
   
+}
+
+.cornerPages{
+  padding: 4px 7px;
+  margin: 0px 5px;
+  border: 0px;
+  background-color: #ffffff50;  
 }
 
 .currentPage{
@@ -25,4 +32,8 @@
 
   border: 0px;
   background-color: #ffffff50;
+}
+
+.loading{
+  width: 50vw;
 }
