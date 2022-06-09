@@ -14,7 +14,7 @@ export default function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(name.length > 0){
-      window.location.href = `http://localhost:3000/pokemons/${name.toLowerCase()}`
+      window.location.href = `http://localhost:3000/pokemon/${name.toLowerCase()}`
       setName('')
     }
   }
@@ -33,16 +33,16 @@ export default function Navbar() {
       </Link>
         </div>
 
-      <div className="searchBar">
+      <form onSubmit={e => handleSubmit(e)} className="searchBar">
         <label htmlFor="Search">
         <input type="search" placeholder="Buscar..." id="Search" name="pokeQ" value={name} onChange={(e) => handleChange(e)}/>
         </label>
-        <input type="submit" className="Submit" onClick={e => handleSubmit(e)}/>
-      </div>
+        <input type="submit" className="Submit"/>
+      </form>
 
-      <div className="Create">
+      <div >
         <Link to={'/create'}>
-          <button>Crear</button>
+          <button className="Create" >Crear</button>
         </Link>
       </div>
 

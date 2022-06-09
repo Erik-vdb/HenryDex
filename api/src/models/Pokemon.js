@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       unique: true,
-      allowNull:false
     },
     nombre: {
       type: DataTypes.STRING,
@@ -36,12 +35,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER
     },
     img: {
-      type: DataTypes.STRING,
-      unique: true
-    },
-    tipos:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false
+      type: DataTypes.TEXT,
     },
     createdInDB: {
       type: DataTypes.BOOLEAN,

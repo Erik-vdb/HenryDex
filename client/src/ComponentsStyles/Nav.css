@@ -25,5 +25,26 @@
 
 .RootLink-Pokeball{
   width: 8vw;
-  
+}
+
+#Search{
+  background-color: #00000038;
+  border-radius: 10px 0px 0px 10px;
+  padding: 5px 10px;
+  height: 50%;
+  border: 0px;
+}
+
+.Submit{
+  background-color: #00000080;
+  padding: 5px 10px;
+  border: 0px;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.Create{
+  border: 0px;
+  background-color: #00000038;
+  padding: 5px 10px;
+  border-radius: 0px 15px 0px 15px;
 }

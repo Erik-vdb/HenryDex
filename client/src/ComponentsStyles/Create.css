@@ -2,13 +2,20 @@
   display: flex;
 }
 
+.imgPreview{
+  width: 15vw;
+  height: 15vw;
+}
+
 .Creation{
   display: flex;
   flex-direction: column;
   align-items: center;
 
   margin: auto;
+  padding: 20px 0px;
   width: 50%;
+  height: 100%;
 
   background-color: #ffffff80;
   border: 1px solid #ffffff70;

@@ -1,39 +1,112 @@
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
 .startPage{
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.pages{
+.sources{
   display: flex;
-  justify-content: center;
-  width: 100%;
+  padding: 0px 10px;
+  height: 5vh;
+
+  background-color: #ffffff50;
+  border: 1px solid #ffffff70;
   
+  border-radius: 10vh;
+}
+
+.source{
+  background-color: #00000000;
+  border: 0px;
+  height: 100%;
+}
+
+.currentSource{
+  background-color: #00000050;
+
+  border-radius: 100%;
+}
+
+
+#TypeSelect{
+  height: 5vh;
+  padding: 5px;
+
+  border: 1px solid #ffffff70;
+  background-color: #ffffff50;
+  border-radius: 10vh;
+}
+#orderSelect{
+  padding: 5px;
+  margin: 5px;
+  margin-right: 0px;
+  height: 5vh;
+
+  border: 1px solid #ffffff70;
+  border-right: 0px;
+  background-color: #ffffff50;
+  border-radius: 10vh 0vh 0vh 10vh;
+}
+#orderButton{
+  height: 5vh;
+  padding: 0px 15px;
+  margin: 5px;
+  margin-left: 0px;
+  border: 1px solid #ffffff70;
+  border-left: 0px;
+  background-color: #ffffff50;
+  border-radius: 0px 10vh 10vh 0px;
+}
+
+.pagination{
+  border: 1px solid #ffffff50;
+  border-radius: 5vw;
+  background-color: #ffffff50;
+  padding: 5px 10px;
+  margin: 0px 5px ;
+  height: 5vh;
 }
 
 .cornerPages{
   padding: 4px 7px;
+  width: 35px;
   margin: 0px 5px;
   border: 0px;
-  background-color: #ffffff50;  
+  background-color: #ffffff50;
+  border-radius: 10vw;  
 }
 
 .currentPage{
-  margin: 0px 5px;
+  
   border: 0px;
   padding: 7px 10px;
-
-  border-radius: 5px;
-  background-color: rgb(59, 65, 247);
+  width: 40px;
+  border-radius: 20vw;
+  background-color: rgba(59, 65, 247, 0.749);
+  border: 1px solid rgba(59, 65, 247);
 }
 
 .otherPages{
   padding: 4px 7px;
-
+  width: 35px;
+  
   border: 0px;
-  background-color: #ffffff50;
+  background-color: #ffffff00;
 }
 
 .loading{
   width: 50vw;
+}
+
+@media only screen and (max-width: 600px){
+  .pages{
+    flex-direction: column;
+  }
 }

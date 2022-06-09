@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vw;
-
+  
   align-items: center;
 }
 
@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 40vw;
   background-color: #ffffff60;
 
   border-radius: 10vw;
@@ -29,7 +29,7 @@
   border: 1px solid #ffffff80;
 }
 .PokeImg{
-  width: 30%;
+  width: 20vw;
 }
 
 .loading{

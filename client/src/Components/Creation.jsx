@@ -28,21 +28,9 @@ export default function Creation() {
     height: '',
     weight: '',
     type: '',
-
   })
 
-  const [Create, setCreate] = useState({
-    Name,
-    Img,
-    Height,
-    Weight,
-    Types,
-    Hp,
-    Atk,
-    Def,
-    Spd
-  })
-  const {foundPokemon, status} = useSelector(state => state.pokemons)
+  const { status } = useSelector(state => state.pokemons)
 
   //-------Controllers-------
   const handleGlobalChange = (e) => {
@@ -104,14 +92,11 @@ export default function Creation() {
     
   }
 
-  
-  //-------Validator---------
+//-------Validator---------
   useEffect(() => {
-    !Name.length ? setError({...error, name:'Ingrese un Nombre'}) || setAllow(false) :
+    !Name ? setError({...error, name:'Ingrese un Nombre'}) || setAllow(false) :
     Height < 1 ? setError({...error, height:'Ingrese una altura', name:''}) || setAllow(false) :
-    Height > 1000 ? setHeight(1000) : 
     Weight < 1 ? setError({...error, weight:'Ingrese un peso', height:''}) || setAllow(false) :
-    Weight > 5000 ? setWeight(5000) : 
     !Types.slot1 ? setError({...error, type:'Ingrese al menos un tipo', weight:''}) || setAllow(false) :
     setError({name: '', height: '', weight: '', type: '', stats: ''}) || setAllow(true)
     
@@ -122,100 +107,89 @@ export default function Creation() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    setCreate({
-      Name,
-      Img,
-      Height,
-      Weight,
-      Types,
-      Hp,
-      Atk,
-      Def,
-      Spd
-    })
 
-    const type = []
-    type.push(Types.slot1, Types.slot2 ? Types.slot2 : 'None')
-    
     const newPoke = {
-      "name": Name,
+      "nombre": Name.toLowerCase(),
       "vida": Hp,
       "fuerza": Atk,
       "defensa": Def,
       "velocidad": Spd,
       "altura": Height,
       "peso": Weight,
-      "tipos": type,
+      "tipos": [Types.slot1, Types.slot2 && Types.slot2],
       "img": Img
     }
+
+    dispatch(createPokemon(newPoke))
+
   }
 
   //--------------------
   return(
     <div className='Creation'>
       <label htmlFor="Name">Name:</label>
-      <input type="text" name='Name' value={Name} onChange={e => handleGlobalChange(e)} />
+      <input type="text" name='Name' placeholder={error.name} value={Name} onChange={e => handleGlobalChange(e)} />
 
       <label htmlFor="Img">Img:</label>
-      <input type="text" name='Img' onChange={e => handleGlobalChange(e)}/>
-			<img src={Img} alt=""/>
+      <input type="text" name='Img' placeholder='Se recomienda AR 1:1' onChange={e => handleGlobalChange(e)}/>
+			{Img ? <img className='imgPreview' src={Img} alt=""/>: <></>}
 
       <label htmlFor="Height">Altura:</label>
-      <input type="number" name='Height' min={0} max={1000} value={Height} onChange={e => handleGlobalChange(e)}/>
+      <input type="number" name='Height' placeholder={error.height} min={0} max={1000} value={Height} onChange={e => handleGlobalChange(e)}/>
 
       <label htmlFor="Weight">Peso:</label>
-      <input type="number" name='Weight' min={0} max={5000} value={Weight} onChange={e => handleGlobalChange(e)}/>
+      <input type="number" name='Weight' placeholder={error.weight} min={0} max={5000} value={Weight} onChange={e => handleGlobalChange(e)}/>
 
       <label htmlFor="Type1">Tipo 1:</label>
       <select name="Type1" id="Type1" onChange={e => handleGlobalChange(e)}>
-        <option value="None">None</option>
-        <option value="Normal">Normal</option>
-        <option value="Figthing">Figthing</option>
-        <option value="Flying">Flying</option>
-        <option value="Poison">Poison</option>
-        <option value="Ground">Ground</option>
-        <option value="Rock">Rock</option>
-        <option value="Bug">Bug</option>
-        <option value="Ghost">Ghost</option>
-        <option value="Steel">Steel</option>
-        <option value="Fire">Fire</option>
-        <option value="Water">Water</option>
-        <option value="Grass">Grass</option>
-        <option value="Electric">Electric</option>
-        <option value="Psychic">Psychic</option>
-        <option value="Ice">Ice</option>
-        <option value="Dragon">Dragon</option>
-        <option value="Dark">Dark</option>
-        <option value="Fairy">Fairy</option>
-        <option value="Shadow">Shadow</option>
-        <option value="Unknown">Unknown</option>
+      <option value="">None</option>
+        <option value="normal">Normal</option>
+        <option value="figthing">Figthing</option>
+        <option value="flying">Flying</option>
+        <option value="poison">Poison</option>
+        <option value="ground">Ground</option>
+        <option value="rock">Rock</option>
+        <option value="bug">Bug</option>
+        <option value="ghost">Ghost</option>
+        <option value="steel">Steel</option>
+        <option value="fire">Fire</option>
+        <option value="water">Water</option>
+        <option value="grass">Grass</option>
+        <option value="electric">Electric</option>
+        <option value="psychic">Psychic</option>
+        <option value="ice">Ice</option>
+        <option value="dragon">Dragon</option>
+        <option value="dark">Dark</option>
+        <option value="fairy">Fairy</option>
+        <option value="shadow">Shadow</option>
+        <option value="unknown">Unknown</option>
       </select>
       
 
 			{Types.slot1 !== '' ? <>
       <label htmlFor="Type2">Tipo 2:</label>
       <select name="Type2" id="Type2" onChange={e => handleGlobalChange(e)}>
-        <option value="None">None</option>
-        <option value="Normal">Normal</option>
-        <option value="Figthing">Figthing</option>
-        <option value="Flying">Flying</option>
-        <option value="Poison">Poison</option>
-        <option value="Ground">Ground</option>
-        <option value="Rock">Rock</option>
-        <option value="Bug">Bug</option>
-        <option value="Ghost">Ghost</option>
-        <option value="Steel">Steel</option>
-        <option value="Fire">Fire</option>
-        <option value="Water">Water</option>
-        <option value="Grass">Grass</option>
-        <option value="Electric">Electric</option>
-        <option value="Psychic">Psychic</option>
-        <option value="Ice">Ice</option>
-        <option value="Dragon">Dragon</option>
-        <option value="Dark">Dark</option>
-        <option value="Fairy">Fairy</option>
-        <option value="Shadow">Shadow</option>
-        <option value="Unknown">Unknown</option>
+        <option value="">None</option>
+        <option value="normal">Normal</option>
+        <option value="figthing">Figthing</option>
+        <option value="flying">Flying</option>
+        <option value="poison">Poison</option>
+        <option value="ground">Ground</option>
+        <option value="rock">Rock</option>
+        <option value="bug">Bug</option>
+        <option value="ghost">Ghost</option>
+        <option value="steel">Steel</option>
+        <option value="fire">Fire</option>
+        <option value="water">Water</option>
+        <option value="grass">Grass</option>
+        <option value="electric">Electric</option>
+        <option value="psychic">Psychic</option>
+        <option value="ice">Ice</option>
+        <option value="dragon">Dragon</option>
+        <option value="dark">Dark</option>
+        <option value="fairy">Fairy</option>
+        <option value="shadow">Shadow</option>
+        <option value="unknown">Unknown</option>
       </select>
 			</> : <></>
 			}
@@ -248,6 +222,8 @@ export default function Creation() {
       <span>{error.weight}</span>
       <span>{error.type}</span>
       
+      {status === 'failed' ? <span>Este pokemon ya existe</span> : <></>}
+      {status === 'created' ? <> <span>Pokemon creado exitosamente.</span> <a href="/home">Volver al home</a></> : <></>}
     </div>
   )
 }
