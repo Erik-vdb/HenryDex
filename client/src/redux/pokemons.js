@@ -11,20 +11,21 @@ export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page 
     .then(res => res.json())
 })
 
-export const getPokemonByName = createAsyncThunk('pokemons/searchPokemon', async(name) => {
+export const getPokemonByName = createAsyncThunk('pokemons/searchPokemon', async (name) => {
   return fetch(`http://localhost:3001/pokemon?name=${name}`)
-  .then(res => res.json())
+    .then(res => res.json())
 })
 
 export const createPokemon = createAsyncThunk('pokemons/createPokemons', async (body) => {
   return axios.post('http://localhost:3001/pokemons', body)
 })
 
-export const deletePokemon = createAsyncThunk('pokemons/deletePokemon', async(ID) => {
+export const deletePokemon = createAsyncThunk('pokemons/deletePokemon', async (ID) => {
   return axios.delete('http://localhost:3000/pokemons', ID)
 })
 
 export const pokemonsSlice = createSlice({
+
   name: 'pokemons',
   initialState: {
     options: {
@@ -38,59 +39,62 @@ export const pokemonsSlice = createSlice({
     pokemons: [],
     status: null
   },
+
   reducers: {
-    changeOptions(state, {payload}){
+    changeOptions(state, { payload }) {
       state.options[payload[0]] = payload[1]
     },
-    
-    applyOptions(state){
+
+    applyOptions(state) {
       //Source
-      switch (state.options.source){
-        case 'Api':{
+      switch (state.options.source) {
+        case 'Api': {
           state.pokemons = state.allPokemons.filter(el => !el.createdInDB)
           break
         }
-        case 'DB':{
+        case 'DB': {
           state.pokemons = state.allPokemons.filter(el => el.createdInDB)
           break
         }
-        case 'Any':{
+        case 'Any': {
           state.pokemons = state.allPokemons
           break
         }
-        default:{
+        default: {
           break
         }
       }
       //Type
-      if(state.options.types === 'None'){
-        
+      if (state.options.types === 'None') {
       } else {
         state.pokemons = state.pokemons.slice().filter(el => {
-          if(el.types.find(el => el.name === state.options.types)) return true
+          if (el.types.find(el => el.name === state.options.types)) return true
           return false
         })
       }
 
       //Sort
-      switch (state.options.order){
-        case 'id':{
-          state.pokemons = state.allPokemons
+      switch (state.options.order) {
+        case 'id': {
+          state.pokemons = state.pokemons.slice().sort((a, b) => {
+            return typeof b.ID === 'string' ? -1 :
+            a.ID > b.ID ? 1 : -1
+          })
           break
         }
-        case 'name':{
+        case 'name': {
           state.pokemons = state.pokemons.slice().sort((a, b) => {
             return a.nombre > b.nombre ? 1 : -1
           })
           break
         }
-        case 'fuerza':{
-          state.pokemons = state.pokemons.slice().sort((a,b)=>{
+        case 'fuerza': {
+          state.pokemons = state.pokemons.slice().sort((a, b) => {
             return a.fuerza > b.fuerza ? 1 : -1
           })
           break
         }
-        default:{
+        default: {
           break
         }
       }
@@ -145,7 +149,7 @@ export const pokemonsSlice = createSlice({
     [createPokemon.rejected]: (state) => {
       state.status = 'failed'
     },
-    
+
     [deletePokemon.pending]: (state) => {
       state.status = 'deleting'
     },

@@ -66,10 +66,12 @@
 }
 
 .pagination{
+  display: flex;
+  align-items: center;
   border: 1px solid #ffffff50;
   border-radius: 5vw;
   background-color: #ffffff50;
-  padding: 5px 10px;
+  padding: 0px 10px;
   margin: 0px 5px ;
   height: 5vh;
 }
@@ -77,7 +79,7 @@
 .cornerPages{
   padding: 4px 7px;
   width: 35px;
-  margin: 0px 5px;
+  margin: auto 5px;
   border: 0px;
   background-color: #ffffff50;
   border-radius: 10vw;  
