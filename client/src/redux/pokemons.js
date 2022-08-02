@@ -2,26 +2,26 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async (id) => {
-  return fetch(`http://localhost:3001/pokemons/${id}`)
+  return fetch(`/pokemons/${id}`)
     .then(res => res.json())
 })
 
 export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page = 1) => {
-  return fetch(`http://localhost:3001/pokemons?page=${page}`)
+  return fetch(`/pokemons?page=${page}`)
     .then(res => res.json())
 })
 
 export const getPokemonByName = createAsyncThunk('pokemons/searchPokemon', async (name) => {
-  return fetch(`http://localhost:3001/pokemon?name=${name}`)
+  return fetch(`/pokemon?name=${name}`)
     .then(res => res.json())
 })
 
 export const createPokemon = createAsyncThunk('pokemons/createPokemons', async (body) => {
-  return axios.post('http://localhost:3001/pokemons', body)
+  return axios.post('/pokemons', body)
 })
 
 export const deletePokemon = createAsyncThunk('pokemons/deletePokemon', async (ID) => {
-  return axios.delete('http://localhost:3000/pokemons', ID)
+  return axios.delete('/pokemons', ID)
 })
 
 export const pokemonsSlice = createSlice({
