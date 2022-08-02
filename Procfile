@@ -1,1 +1,1 @@
-web: node "./api/src/app.js"
+web: node ./api/src/app.js
