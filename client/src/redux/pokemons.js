@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async (id) => {
   return axios.get(`/pokemons/${id}`)
     .then(res => res.json())
