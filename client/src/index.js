@@ -8,7 +8,7 @@ import axios from 'axios'
 import store from './redux/store'
 import './index.css';
 
-axios.defaults.baseURL = `${process.env.REACT_APP_API}` || "http://localhost:3001"
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
 ReactDOM.render(
   <React.StrictMode>
