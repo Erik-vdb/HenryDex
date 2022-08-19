@@ -145,7 +145,7 @@ router.get('/types', async (req, res) => {
     })
     const types = await Type.findAll()
     res.send(types)
-})()
+})
 
 
 router.post('/pokemons', async (req, res) => {

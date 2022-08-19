@@ -2,6 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
+export const getPokemonTypes = createAsyncThunk('types/getTypes', async() => {
+  return axios.get("/types")
+})
 
 export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async (id) => {
   return axios.get(`/pokemons/${id}`)
@@ -165,6 +168,16 @@ export const pokemonsSlice = createSlice({
       state.status = 'deleted'
     },
     [deletePokemon.rejected]: (state) => {
+      state.status = 'failed'
+    },
+
+    [getPokemonTypes.pending]: (state) => {
+      state.status = 'loading'
+    },
+    [getPokemonTypes.fulfilled]: (state, { payload }) => {
+      state.status = 'success'
+    },
+    [getPokemonTypes.rejected]: (state) => {
       state.status = 'failed'
     },
   }
