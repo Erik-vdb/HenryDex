@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import '../ComponentsStyles/Pokemons.css'
 import { getPokemonTypes } from '../redux/pokemons'
@@ -7,7 +8,10 @@ export default function Pokemons(props) {
   let arr = props.props
   const dispatch = useDispatch()
   
-  dispatch(getPokemonTypes())
+  useEffect(() => {
+    dispatch(getPokemonTypes())
+  })
+
   return (
     <div className='container'>
       {arr.map(el => {
