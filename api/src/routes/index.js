@@ -145,10 +145,8 @@ router.get('/types', async (req, res) => {
     })
     const types = await Type.findAll()
     res.send(types)
+})()
 
-  // const types = await getPokemonTypes()
-  // res.send(types)
-})
 
 router.post('/pokemons', async (req, res) => {
   const { nombre, vida, fuerza, defensa, velocidad, altura, peso, tipos, img } = req.body
