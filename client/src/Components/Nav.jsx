@@ -14,7 +14,7 @@ export default function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(name.length > 0){
-      window.location.href = `http://localhost:3000/pokemon/${name.toLowerCase()}`
+      window.location.href = `https://henry-dex.vercel.app/pokemon/${name.toLowerCase()}`
       setName('')
     }
   }
