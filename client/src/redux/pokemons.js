@@ -4,30 +4,30 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
 
 export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async (id) => {
-  return axios.get(`pokemons/${id}`)
+  return axios.get(`/pokemons/${id}`)
     .then(res => res.json())
     .catch(err => console.log(err))
 })
 
 export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page = 1) => {
-  return axios.get(`pokemons?page=${page}`)
+  return axios.get(`/pokemons?page=${page}`)
     .then(res => res.json())
     .catch(err => console.log(err))
 })
 
 export const getPokemonByName = createAsyncThunk('pokemons/searchPokemon', async (name) => {
-  return axios.get(`pokemon?name=${name}`)
+  return axios.get(`/pokemon?name=${name}`)
     .then(res => res.json())
     .catch(err => console.log(err))
 })
 
 export const createPokemon = createAsyncThunk('pokemons/createPokemons', async (body) => {
-  return axios.post('pokemons', body)
+  return axios.post('/pokemons', body)
   .catch(err => console.log(err))
 })
 
 export const deletePokemon = createAsyncThunk('pokemons/deletePokemon', async (ID) => {
-  return axios.delete('pokemons', ID)
+  return axios.delete('/pokemons', ID)
   .catch(err => console.log(err))
 })
 
