@@ -168,6 +168,7 @@ router.post('/pokemons', async (req, res) => {
 
 router.delete('/pokemons', async (req, res) => {
   const {ID} = req.body
+  console.log(ID)
   try {
     await Pokemon.destroy({where: {ID:ID}})
     res.status(202).send()
