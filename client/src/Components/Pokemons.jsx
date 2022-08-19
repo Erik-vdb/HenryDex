@@ -7,10 +7,7 @@ import PokeCard from './PokeCard'
 export default function Pokemons(props) {
   let arr = props.props
   const dispatch = useDispatch()
-  
-  useEffect(() => {
-    dispatch(getPokemonTypes())
-  })
+
 
   return (
     <div className='container'>
