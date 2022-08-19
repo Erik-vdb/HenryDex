@@ -13,9 +13,9 @@ export default function PokemonDetail() {
   const handleDelete = (e) => {
     e.preventDefault()
     dispatch(deletePokemon(foundPokemon.ID))
-    setTimeout(() => {
-      window.location.href = '/home'
-    }, 3000);
+    // setTimeout(() => {
+    //   window.location.href = '/home'
+    // }, 3000);
   }
 
   useEffect(() => {
