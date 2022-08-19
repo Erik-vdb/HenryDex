@@ -11,7 +11,7 @@ export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async 
 
 export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page = 1) => {
   return axios.get(`/pokemons?page=${page}`)
-    // .then(res => res.json())
+    .then(res => res.data)
     .catch(err => console.log(err))
 })
 
