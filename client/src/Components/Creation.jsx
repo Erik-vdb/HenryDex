@@ -116,7 +116,7 @@ export default function Creation() {
       "velocidad": Spd,
       "altura": Height,
       "peso": Weight,
-      "tipos": [Types.slot1, Types.slot2 && Types.slot2],
+      "types": [Types.slot1, Types.slot2 && Types.slot2],
       "img": Img
     }
 

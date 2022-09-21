@@ -149,12 +149,13 @@ router.get('/types', async (req, res) => {
 
 
 router.post('/pokemons', async (req, res) => {
-  const { nombre, vida, fuerza, defensa, velocidad, altura, peso, tipos, img } = req.body
+  const { nombre, vida, fuerza, defensa, velocidad, altura, peso, types, img } = req.body
 
   try {
     const newPoke = await Pokemon.create({ nombre, vida, fuerza, defensa, velocidad, altura, peso, img, createdInDB: true })
-    const types = await Type.findAll({where: {name: tipos}})
-    await newPoke.addType(types)
+    const tipo = await Type.findAll({where: {name: types}})
+    console.log(tipo)
+    await newPoke.addType(tipo)
 
     const confirm = await Pokemon.findOne({ where: {nombre: nombre}, include:{model:Type}})
 
