@@ -1,12 +1,9 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import '../ComponentsStyles/Pokemons.css'
-import { getPokemonTypes } from '../redux/pokemons'
 import PokeCard from './PokeCard'
 
 export default function Pokemons(props) {
   let arr = props.props
-  const dispatch = useDispatch()
+
 
 
   return (

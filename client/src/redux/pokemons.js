@@ -6,17 +6,18 @@ export const getPokemonTypes = createAsyncThunk('types/getTypes', async() => {
   return axios.get("/types")
 })
 
+export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page = 1) => {
+  return axios.get(`/pokemons?page=${page}`)
+    .then(res => res.data)
+    .catch(err => console.log(err))
+})
+
 export const getSinglePokemon = createAsyncThunk('pokemons/getPokemonId', async (id) => {
   return axios.get(`/pokemons/${id}`)
     .then(res => res.data)
     .catch(err => console.log(err))
 })
 
-export const getPokemons = createAsyncThunk('pokemons/getPokemons', async (page = 1) => {
-  return axios.get(`/pokemons?page=${page}`)
-    .then(res => res.data)
-    .catch(err => console.log(err))
-})
 
 export const getPokemonByName = createAsyncThunk('pokemons/searchPokemon', async (name) => {
   return axios.get(`/pokemon?name=${name}`)
