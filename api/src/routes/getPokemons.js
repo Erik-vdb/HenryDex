@@ -8,7 +8,7 @@ module.exports =  async function (req, res) {
     source === 'DB' ? 
     await fetchDatabase(page) : 
     await groupAllPokemons(page)
-    res.status(202).send(pokemons)
+    res.status(202).send(pokemons || [])
   } catch ({message}) {
     res.status(404).send(message)
   }
