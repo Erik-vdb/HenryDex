@@ -1,6 +1,6 @@
 const { Pokemon, Type } = require('../db')
 
-export default async function (req, res) {
+module.exports =  async function (req, res) {
   const { nombre, vida, fuerza, defensa, velocidad, altura, peso, types, img } = req.body
 
   try {

@@ -1,20 +1,15 @@
 const { Router } = require('express')
 
-import createPokemon from './createPokemon';
-import deletePokemon from './deletePokemon';
-import { fetchApi, fetchDatabase } from './fetch';
-import getPokeId from './getPokeId';
-import getPokemons from './getPokemons';
-import getPokeName from './getPokeName';
-import getTypes from './getTypes';
+const createPokemon = require ('./createPokemon')
+const deletePokemon = require ('./deletePokemon')
+const getPokeId = require ('./getPokeId')
+const getPokemons = require ('./getPokemons')
+const getPokeName = require ('./getPokeName')
+const getTypes = require ('./getTypes')
 
 
 //-------------------------------------
-export const groupAllPokemons = async (page) => {
-  const api = await fetchApi(page)
-  const DB = await fetchDatabase(page)
-  return api.concat(DB)
-}
+
 //-------------------------------------
 
 const router = Router();

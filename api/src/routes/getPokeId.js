@@ -1,7 +1,7 @@
 const { Pokemon, Type } = require('../db')
 const axios = require('axios');
 
-export default async function (req, res){
+module.exports =  async function (req, res){
   const { id } = req.params
   if(id.length > 4){
     try {

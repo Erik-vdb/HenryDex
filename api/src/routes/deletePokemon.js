@@ -1,4 +1,4 @@
-export default async function (req, res) {
+module.exports =  async function (req, res) {
   const {ID} = req.body
   try {
     await Pokemon.destroy({where: {ID:ID}})

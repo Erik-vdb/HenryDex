@@ -1,6 +1,6 @@
 const { Pokemon, Type } = require('../db')
 
-export default async function (req, res) {
+module.exports =  async function (req, res) {
   const {name} = req.query
   try {
     const DB = await Pokemon.findOne({where: {nombre: name}, include:{model: Type}})
