@@ -1,4 +1,4 @@
-const { Pokemon, Type } = require('../db')
+const {fetchApi, fetchDatabase, groupAllPokemons} = require('./fetch')
 
 module.exports =  async function (req, res) {
   const {page, source} = req.query
@@ -12,5 +12,4 @@ module.exports =  async function (req, res) {
   } catch ({message}) {
     res.status(404).send(message)
   }
-
 }

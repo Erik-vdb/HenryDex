@@ -1,11 +1,11 @@
-export const fetchDatabase = async (page) => {
+const fetchDatabase = async (page) => {
   const offset = (page - 1) * 13
   const pokemons = await Pokemon.findAll({ include: { model: Type } })
   const arrSlice = await pokemons.slice(offset, (offset + 13))
   return arrSlice
 }
 
-export const fetchApi = async (page) => {
+const fetchApi = async (page) => {
   let apiOffset = (page - 1) * 12
 
   return axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${apiOffset}&limit=12`)
@@ -36,3 +36,10 @@ export const fetchApi = async (page) => {
 
 }
 
+const groupAllPokemons = async (page) => {
+  const api = await fetchApi(page)
+  const DB = await fetchDatabase(page)
+  return api.concat(DB)
+}
+
+module.exports = {fetchApi, fetchDatabase, groupAllPokemons}

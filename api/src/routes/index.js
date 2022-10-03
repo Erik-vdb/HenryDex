@@ -22,7 +22,6 @@ router.get('/pokemon', getPokeName)
 
 router.get('/types', getTypes)
 
-
 router.post('/pokemons', createPokemon)
 
 router.delete('/pokemons', deletePokemon)
