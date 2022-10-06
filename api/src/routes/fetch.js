@@ -1,4 +1,4 @@
-const { default: axios } = require("axios")
+const axios = require("axios")
 const { Pokemon, Type } = require('../db')
 
 const fetchDatabase = async (page) => {
