@@ -1,5 +1,5 @@
-const axios = require("axios")
 const { Pokemon, Type } = require('../db')
+const axios = require("axios")
 
 const fetchDatabase = async (page) => {
   const offset = (page - 1) * 13
