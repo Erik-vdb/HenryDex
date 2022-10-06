@@ -14,7 +14,7 @@
 .sources{
   display: flex;
   padding: 0px 10px;
-  height: 5vh;
+  height: 40px;
 
   background-color: #ffffff50;
   border: 1px solid #ffffff70;
@@ -36,7 +36,7 @@
 
 
 #TypeSelect{
-  height: 5vh;
+  height: 40px;
   padding: 5px;
 
   border: 1px solid #ffffff70;
@@ -47,7 +47,7 @@
   padding: 5px;
   margin: 5px;
   margin-right: 0px;
-  height: 5vh;
+  height: 40px;
 
   border: 1px solid #ffffff70;
   border-right: 0px;
@@ -55,7 +55,7 @@
   border-radius: 10vh 0vh 0vh 10vh;
 }
 #orderButton{
-  height: 5vh;
+  height: 40px;
   padding: 0px 15px;
   margin: 5px;
   margin-left: 0px;
@@ -73,7 +73,7 @@
   background-color: #ffffff50;
   padding: 0px 10px;
   margin: 0px 5px ;
-  height: 5vh;
+  height: 40px;
 }
 
 .cornerPages{

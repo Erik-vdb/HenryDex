@@ -1,3 +1,6 @@
+const { default: axios } = require("axios")
+const { Pokemon, Type } = require('../db')
+
 const fetchDatabase = async (page) => {
   const offset = (page - 1) * 13
   const pokemons = await Pokemon.findAll({ include: { model: Type } })

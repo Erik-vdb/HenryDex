@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
 export const getPokemonTypes = createAsyncThunk('types/getTypes', async() => {
@@ -144,7 +145,7 @@ export const pokemonsSlice = createSlice({
     },
     [getPokemons.fulfilled]: (state, { payload }) => {
       state.allPokemons.concat = payload
-      state.pokemons.concat = payload
+      state.pokemons.concat = payload 
       state.status = 'success'
     },
     [getPokemons.rejected]: (state) => {

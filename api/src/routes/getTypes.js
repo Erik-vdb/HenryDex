@@ -1,4 +1,6 @@
+const { default: axios } = require('axios')
 const { Type } = require('../db')
+
 
 module.exports = async function (req, res) {
   axios.get('https://pokeapi.co/api/v2/type')

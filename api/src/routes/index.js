@@ -7,11 +7,6 @@ const getPokemons = require ('./getPokemons')
 const getPokeName = require ('./getPokeName')
 const getTypes = require ('./getTypes')
 
-
-//-------------------------------------
-
-//-------------------------------------
-
 const router = Router();
 
 router.get('/pokemons', getPokemons)

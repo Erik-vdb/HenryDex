@@ -10,6 +10,6 @@ module.exports =  async function (req, res) {
     await groupAllPokemons(page)
     res.status(202).send(pokemons || [])
   } catch ({message}) {
-    res.status(404).send(message)
+    console.log(message)
   }
 }

@@ -1,3 +1,5 @@
+const { Pokemon, Type } = require('../db')
+
 module.exports =  async function (req, res) {
   const {ID} = req.body
   try {

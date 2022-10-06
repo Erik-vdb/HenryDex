@@ -22,7 +22,7 @@ const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(process.env.PORT || 5432, () => {
-    console.log(`Listenint at Port ${process.env.PORT || 5432}`); // eslint-disable-line no-console
+  server.listen (process.env.PORT || 5432, () => {
+    console.log (`Listening at Port ${process.env.PORT || 5432}`); // eslint-disable-line no-console
   });
 });
