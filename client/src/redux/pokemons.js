@@ -144,8 +144,8 @@ export const pokemonsSlice = createSlice({
       state.status = 'loading'
     },
     [getPokemons.fulfilled]: (state, { payload }) => {
-      state.allPokemons.concat = payload
-      state.pokemons.concat = payload 
+      state.allPokemons = payload || []
+      state.pokemons = payload || []
       state.status = 'success'
     },
     [getPokemons.rejected]: (state) => {
