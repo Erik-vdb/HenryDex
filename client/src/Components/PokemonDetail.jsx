@@ -22,7 +22,6 @@ export default function PokemonDetail() {
     dispatch(getSinglePokemon(id))
     return () => {
       dispatch(foundPokemonReset())
-      console.log('demount')
     }
   }, [id, dispatch])
 
