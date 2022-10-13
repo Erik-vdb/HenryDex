@@ -21,13 +21,7 @@ const { default: axios } = require('axios');
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen (process.env.PORT || 5432, () => {
-    console.log (`Listening at Port ${process.env.PORT || 5432}`); // eslint-disable-line no-console
-  });
-}).then(fetchTypes)
-
+// Load types to the database on initialization of server (recursive function)
 const fetchTypes = async () => { 
   axios.get("https://henry-dex-bghw.onrender.com/types")
   .then(({data}) => {
@@ -43,3 +37,11 @@ const fetchTypes = async () => {
     console.log(message)
   })
  }
+
+// Syncing all the models at once.
+conn.sync({ force: true }).then(() => {
+  server.listen (process.env.PORT || 5432, () => {
+    console.log (`Listening at Port ${process.env.PORT || 5432}`); // eslint-disable-line no-console
+  });
+}).then(fetchTypes)
+
