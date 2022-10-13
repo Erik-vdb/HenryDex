@@ -32,9 +32,12 @@ const fetchTypes = async () => {
   axios.get("https://henry-dex-bghw.onrender.com/types")
   .then(({data}) => {
     if (!data){
-      fetchTypes()
+      return fetchTypes()
     }
-    else return
+    else {
+      console.log(data)
+      return data
+    } 
   })
   .catch(({message}) => {
     console.log(message)
