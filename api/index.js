@@ -17,6 +17,7 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const { default: axios } = require('axios');
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
@@ -25,4 +26,17 @@ conn.sync({ force: true }).then(() => {
   server.listen (process.env.PORT || 5432, () => {
     console.log (`Listening at Port ${process.env.PORT || 5432}`); // eslint-disable-line no-console
   });
-});
+}).then(fetchTypes)
+
+const fetchTypes = async () => { 
+  axios.get("https://henry-dex-bghw.onrender.com/types")
+  .then(({data}) => {
+    if (!data){
+      fetchTypes()
+    }
+    else return
+  })
+  .catch(({message}) => {
+    console.log(message)
+  })
+ }
