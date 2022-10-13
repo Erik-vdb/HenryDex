@@ -32,8 +32,7 @@ export const createPokemon = createAsyncThunk('pokemons/createPokemons', async (
 })
 
 export const deletePokemon = createAsyncThunk('pokemons/deletePokemon', async (ID) => {
-  console.log(ID)
-  return axios.delete('/pokemons', {ID})
+  return await axios.delete('/pokemons', {ID})
   .catch(err => console.log(err))
 })
 
